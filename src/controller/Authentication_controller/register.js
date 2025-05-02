@@ -10,13 +10,33 @@ const register = async (req, res) => {
     const { name, email, password } = req.body;
 
     const existingUser = await userModel.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "user already exist" });
-    }
-    const hashedPassword = await bcrypt.hash(password, 10);
 
     const otp = generateOTP();
     const otpExpires = new Date(Date.now() + 60 * 1000);
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    if (existingUser) {
+      if (existingUser.isVerified) {
+        return res.status(400).json({ message: "user already exist" });
+      } else {
+        existingUser.name = name;
+        existingUser.password = hashedPassword;
+        existingUser.otp = otp;
+        existingUser.otpExpires = otpExpires;
+        await existingUser.save();
+
+        await sendEmail(
+          email,
+          `Email Verification OTP ${otp}`,
+          `Your OTP is ${otp}`
+        );
+
+        return res.status(200).json({
+          message:
+            "OTP re-sent to your email. Please verify to complete registration",
+        });
+      }
+    }
 
     const newUser = await userModel.create({
       name,
@@ -24,6 +44,7 @@ const register = async (req, res) => {
       password: hashedPassword,
       otp,
       otpExpires,
+      isVerified: false,
     });
 
     await sendEmail(
@@ -33,7 +54,7 @@ const register = async (req, res) => {
     );
 
     res
-      .status(200)
+      .status(201)
       .json({ message: "user register successfully , OTP sent to your email" });
   } catch (error) {
     res
