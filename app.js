@@ -4,6 +4,7 @@ dotenv.config();
 import cors from "cors";
 import connectDB from "./src/database/database.js";
 import AuthRouter from "./src/routes/Authentication_routes/AuthRouter.js";
+import ResumeRouter from "./src/routes/resume/resume.js";
 
 // create server
 const app = express();
@@ -21,6 +22,7 @@ const PORT = process.env.PORT || 8080;
 
 // create route
 app.use("/api/auth", AuthRouter);
+app.use("/", ResumeRouter);
 
 // database connetion
 connectDB()
