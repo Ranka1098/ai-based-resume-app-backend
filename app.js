@@ -5,7 +5,7 @@ import cors from "cors";
 import connectDB from "./src/database/database.js";
 import AuthRouter from "./src/routes/Authentication_routes/AuthRouter.js";
 import ResumeRouter from "./src/routes/resume/resume.js";
-import personalRouter from "./src/routes/Personal_info/personalRouter.js";
+import personalRouter from "./src/routes/personDetail/personRouter.js";
 
 // create server
 const app = express();
@@ -14,7 +14,6 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
     credentials: true,
   })
 );
