@@ -12,6 +12,14 @@ const resumeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    personalInfo: {
+      firstName: String,
+      lastName: String,
+      jobTitle: String,
+      address: String,
+      phone: String,
+      email: String,
+    },
   },
   {
     timestamps: true,
