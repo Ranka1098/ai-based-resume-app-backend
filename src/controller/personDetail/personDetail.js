@@ -5,6 +5,10 @@ const personDetail = async (req, res) => {
     const { id } = req.params;
     const { firstName, lastName, jobTitle, email, phone, address } = req.body;
 
+    if (!firstName || !lastName || !jobTitle || !email || !phone || !address) {
+      return res.status(404).json({ message: "plss fill all fied" });
+    }
+
     const resume = await resumeModel.findById(id);
 
     if (!resume) {
