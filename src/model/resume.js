@@ -20,6 +20,10 @@ const resumeSchema = new mongoose.Schema(
       phone: String,
       email: String,
     },
+    summery: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,
