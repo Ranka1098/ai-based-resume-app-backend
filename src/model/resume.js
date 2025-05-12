@@ -24,6 +24,17 @@ const resumeSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    professionalInfo: [
+      {
+        designation: String,
+        companyName: String,
+        city: String,
+        state: String,
+        startDate: Date,
+        endDate: Date,
+        workSummery: String,
+      },
+    ],
   },
   {
     timestamps: true,
