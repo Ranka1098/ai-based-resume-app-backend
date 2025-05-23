@@ -2,7 +2,7 @@ import resumeModel from "../../model/resume.js";
 
 const projects = async (req, res) => {
   try {
-    const { title, features } = req.body;
+    const { projects } = req.body;
     const { id } = req.params;
 
     const resume = await resumeModel.findById(id);
@@ -10,11 +10,7 @@ const projects = async (req, res) => {
       return res.status(400).json({ message: "resume not exist" });
     }
 
-    if (!title || !features) {
-      return res.status(400).json({ message: "All feilds are required" });
-    }
-
-    resume.projects.push({ title, features });
+    resume.projects.push(...projects);
 
     await resume.save();
 
