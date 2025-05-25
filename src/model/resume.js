@@ -41,7 +41,10 @@ const resumeSchema = new mongoose.Schema(
         features: String,
       },
     ],
-    skill: [String],
+    skill: {
+      type: [String],
+      default: [],
+    },
     education: [String],
   },
   {

@@ -10,7 +10,7 @@ const skill = async (req, res) => {
       return res.status(400).json({ message: "Resume not found" });
     }
 
-    resume.skills.push(skill);
+    resume.skill.push(skill);
     await resume.save();
 
     res
