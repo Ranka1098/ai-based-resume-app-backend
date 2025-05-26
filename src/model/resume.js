@@ -22,7 +22,6 @@ const resumeSchema = new mongoose.Schema(
     },
     summery: {
       type: String,
-      required: true,
     },
     professionalInfo: [
       {
