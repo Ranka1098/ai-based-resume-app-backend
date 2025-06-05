@@ -10,7 +10,11 @@ const education = async (req, res) => {
       return res.status(400).json({ message: "Resume not found" });
     }
 
-    resume.education.push(educationInput);
+    if (Array.isArray(educationInput)) {
+      resume.education.push(...educationInput); // spread the array items
+    } else {
+      resume.education.push(educationInput); // single value
+    }
     await resume.save();
 
     res.status(200).json({

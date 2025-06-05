@@ -1,6 +1,6 @@
 import resumeModel from "../../model/resume.js";
 
-const resume = async (req, res) => {
+const createResume = async (req, res) => {
   try {
     const { title, userName, resumeId, userEmail } = req.body;
 
@@ -32,4 +32,4 @@ const resume = async (req, res) => {
   }
 };
 
-export default resume;
+export default createResume;

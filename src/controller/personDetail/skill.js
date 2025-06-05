@@ -10,8 +10,14 @@ const skill = async (req, res) => {
       return res.status(400).json({ message: "Resume not found" });
     }
 
-    resume.skill.push(skillInput);
+    if (Array.isArray(skillInput)) {
+      resume.skill.push(...skillInput); // spread the array items
+    } else {
+      resume.skill.push(skillInput); // single value
+    }
     await resume.save();
+
+    console.log("Skill input:", req.body.skillInput);
 
     res
       .status(200)

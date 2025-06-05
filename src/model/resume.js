@@ -1,47 +1,62 @@
 import mongoose from "mongoose";
 
+const professionalSchema = new mongoose.Schema({
+  designation: { type: String, default: "" },
+  companyName: { type: String, default: "" },
+  city: { type: String, default: "" },
+  state: { type: String, default: "" },
+  startDate: { type: Date, default: null },
+  endDate: { type: Date, default: null },
+  workSummery: { type: String, default: "" },
+});
+
+const projectSchema = new mongoose.Schema({
+  title: { type: String, default: "" },
+  feature: { type: String, default: "" },
+});
+
 const resumeSchema = new mongoose.Schema(
   {
-    title: String,
-    userName: String,
-    resumeId: {
-      type: String,
-      unique: true,
-    },
-    userEmail: {
-      type: String,
-      required: true,
-    },
+    // Mandatory at creation
+    title: { type: String, required: true },
+    userName: { type: String, required: true },
+    resumeId: { type: String, unique: true, required: true },
+    userEmail: { type: String, required: true },
+
+    // Personal Info
     personalInfo: {
-      firstName: String,
-      lastName: String,
-      jobTitle: String,
-      address: String,
-      phone: String,
-      email: String,
+      firstName: { type: String, default: "" },
+      lastName: { type: String, default: "" },
+      jobTitle: { type: String, default: "" },
+      email: { type: String, default: "" },
+      phone: { type: String, default: "" },
+      address: { type: String, default: "" },
     },
-    summery: {
-      type: String,
+
+    // Summary
+    summery: { type: String, default: "" },
+
+    // Professional Info (can be many)
+    professionalInfo: {
+      type: [professionalSchema],
+      default: [],
     },
-    professionalInfo: [
-      {
-        designation: String,
-        companyName: String,
-        city: String,
-        state: String,
-        startDate: Date,
-        endDate: Date,
-        workSummery: String,
-      },
-    ],
-    projects: [
-      {
-        title: String,
-        feature: String,
-      },
-    ],
-    skill: [String],
-    education: [String],
+
+    // Projects (can be many)
+    projects: {
+      type: [projectSchema],
+      default: [],
+    },
+
+    // Skills and Education (array of strings)
+    skill: {
+      type: [String],
+      default: [],
+    },
+    education: {
+      type: [String],
+      default: [],
+    },
   },
   {
     timestamps: true,
@@ -49,5 +64,4 @@ const resumeSchema = new mongoose.Schema(
 );
 
 const resumeModel = mongoose.model("Resume", resumeSchema);
-
 export default resumeModel;
