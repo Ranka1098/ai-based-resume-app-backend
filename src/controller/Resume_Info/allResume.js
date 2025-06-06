@@ -2,7 +2,13 @@ import resumeModel from "../../model/resume.js";
 
 const allResume = async (req, res) => {
   try {
-    const resumeList = await resumeModel.find({});
+    const { userEmail } = req.query;
+
+    if (!userEmail) {
+      return res.status(400).json({ message: "User email is required" });
+    }
+
+    const resumeList = await resumeModel.find({ userEmail });
 
     if (resumeList.length === 0) {
       return res.status(200).json({ message: "no resume found" });

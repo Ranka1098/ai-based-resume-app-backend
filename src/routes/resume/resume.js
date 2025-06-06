@@ -9,7 +9,7 @@ import atsFriendlyResume from "../../controller/Resume_Info/atsFriendlyResume.js
 const ResumeRouter = express.Router();
 
 ResumeRouter.post("/resumeInfo", createResume);
-ResumeRouter.get("/allresume", allResume);
+ResumeRouter.get("/allresume/", allResume);
 ResumeRouter.get("/singleResumeDetail/:id", singleResume);
 ResumeRouter.post("/deleteSingleResume/:id", deleteSingleResume);
 ResumeRouter.get("/fullresume/:id", fullresume);
