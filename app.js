@@ -9,12 +9,12 @@ import personalRouter from "./src/routes/personDetail/personRouter.js";
 
 // create server
 const app = express();
-
+const allowedOrigins = ["http://localhost:5173"];
 // ceate middleware
 app.use(express.json());
 app.use(
   cors({
-    origin: " http://localhost:5173",
+    origin: allowedOrigins,
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
