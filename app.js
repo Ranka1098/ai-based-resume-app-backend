@@ -12,6 +12,7 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "https://ai-based-resume-app-frontend.onrender.com",
+  "https://luxury-buttercream-ebc5b1.netlify.app",
 ];
 // ceate middleware
 app.use(express.json());
