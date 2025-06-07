@@ -9,16 +9,30 @@ import personalRouter from "./src/routes/personDetail/personRouter.js";
 
 // create server
 const app = express();
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://ai-based-resume-app-frontend.onrender.com",
+];
 // ceate middleware
 app.use(express.json());
 app.use(
   cors({
-    origin: allowedOrigins,
-    methods: "GET,POST,PUT,DELETE",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
+    methods: "GET,POST,PUT,DELETE",
   })
 );
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 const PORT = process.env.PORT || 8080;
 
