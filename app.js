@@ -11,8 +11,7 @@ import personalRouter from "./src/routes/personDetail/personRouter.js";
 const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://ai-based-resume-app-frontend.onrender.com",
-  "https://luxury-buttercream-ebc5b1.netlify.app",
+  "https://ai-based-reume.netlify.app",
 ];
 // ceate middleware
 app.use(express.json());
